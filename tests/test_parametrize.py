@@ -3,7 +3,7 @@ from selene import have
 from selene.support.shared import browser
 
 
-@pytest.fixture(params=['Desktop', 'Mobile'], scope='session')
+@pytest.fixture(params=['Desktop', 'Mobile'], scope='function')
 def open_browser(request):
     if request.param == 'Desktop':
         browser.config.window_width = 1600
@@ -15,7 +15,7 @@ def open_browser(request):
         browser.open('https://github.com')
 
 
-desktop = pytest.mark.parametrize('open_browser', ['Desktop', 'Mobile'], indirect=True)
+desktop = pytest.mark.parametrize('open_browser', ['Desktop'], indirect=True)
 mobile = pytest.mark.parametrize('open_browser', ['Mobile'], indirect=True)
 
 
